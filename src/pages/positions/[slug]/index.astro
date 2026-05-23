@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PositionNav from '@/components/PositionNav.astro';
+import { POSITIONS, POSITION_SECTIONS } from '@/data/positions';
+import { getPositionReadme } from '@/lib/content';
+
+export function getStaticPaths() {
+  return POSITIONS.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const position = POSITIONS.find((p) => p.slug === slug)!;
+const readme = getPositionReadme(position.folder);
+const Content = readme?.Content;
+---
+<BaseLayout title={position.full} description={position.short}>
+  <section class="bg-gradient-to-br from-kiber-dark to-kiber-deep text-white">
+    <div class="container-page py-10 md:py-14">
+      <a href="/positions/" class="text-sm text-kiber-lime/80 hover:text-kiber-lime">← Все должности</a>
+      <div class="mt-4 flex items-start gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-white/10 grid place-items-center text-3xl shrink-0">
+          {position.icon}
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span class="chip bg-white/10 text-white">{position.dept}</span>
+            <span class="chip bg-white/10 text-white">{position.group === 'central' ? 'центральная роль' : 'роль в филиале'}</span>
+          </div>
+          <h1 class="font-display text-3xl md:text-4xl font-extrabold">{position.full}</h1>
+          <p class="mt-2 text-white/85 max-w-3xl">{position.short}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-8">
+    <PositionNav slug={position.slug} active="overview" />
+  </section>
+
+  <section class="container-page pb-8">
+    <div class="grid md:grid-cols-7 gap-4 mb-8">
+      {POSITION_SECTIONS.map((s) => (
+        <a href={`/positions/${position.slug}/${s.slug}/`}
+           class="card p-4 hover:-translate-y-0.5 transition flex md:flex-col gap-3 md:gap-2">
+          <div class="text-2xl">{s.icon}</div>
+          <div class="text-sm font-semibold text-kiber-dark leading-tight">{s.title}</div>
+        </a>
+      ))}
+    </div>
+
+    <article class="card p-6 md:p-10">
+      {Content ? (
+        <div class="prose prose-portal max-w-none">
+          <Content />
+        </div>
+      ) : (
+        <div class="text-kiber-muted">
+          README для должности «{position.title}» пока не подключён в портал.
+          Положи файл <code>README.md</code> в папку <code>kiberone-management/positions/{position.folder}/</code> и перезапусти синхронизацию.
+        </div>
+      )}
+    </article>
+  </section>
+</BaseLayout>

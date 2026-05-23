@@ -1,0 +1,35 @@
+---
+import { POSITION_SECTIONS } from '@/data/positions';
+
+interface Props {
+  slug: string;
+  active?: string; // 'overview' | section.slug
+}
+const { slug, active = 'overview' } = Astro.props;
+---
+<nav class="card p-2 flex flex-wrap gap-1">
+  <a
+    href={`/positions/${slug}/`}
+    class={[
+      'px-3 py-1.5 rounded-full text-sm font-medium transition',
+      active === 'overview'
+        ? 'bg-kiber-dark text-white'
+        : 'text-kiber-dark/80 hover:bg-kiber-dark/5'
+    ].join(' ')}
+  >
+    🏠 Обзор
+  </a>
+  {POSITION_SECTIONS.map((s) => (
+    <a
+      href={`/positions/${slug}/${s.slug}/`}
+      class={[
+        'px-3 py-1.5 rounded-full text-sm font-medium transition',
+        active === s.slug
+          ? 'bg-kiber-dark text-white'
+          : 'text-kiber-dark/80 hover:bg-kiber-dark/5'
+      ].join(' ')}
+    >
+      {s.icon} {s.title}
+    </a>
+  ))}
+</nav>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { REGULATIONS, REGULATION_CATEGORIES } from '@/data/regulations';
+import { POSITIONS } from '@/data/positions';
+import { getRegulation } from '@/lib/content';
+
+export function getStaticPaths() {
+  return REGULATIONS.map((r) => ({ params: { slug: r.slug } }));
+}
+
+const { slug } = Astro.params;
+const reg = REGULATIONS.find((r) => r.slug === slug)!;
+const mod = getRegulation(reg.file);
+const Content = mod?.Content;
+const cat = REGULATION_CATEGORIES[reg.category];
+const roles = reg.forRoles
+  .map((rs) => POSITIONS.find((p) => p.slug === rs))
+  .filter(Boolean) as typeof POSITIONS;
+---
+<BaseLayout title={reg.title} description={reg.short}>
+  <section class="bg-kiber-dark text-white">
+    <div class="container-page py-10 md:py-12">
+      <div class="text-sm space-x-1">
+        <a href="/regulations/" class="text-kiber-lime/80 hover:text-kiber-lime">Регламенты</a>
+        <span class="text-white/40">/</span>
+        <span class="text-white/85">{cat.label}</span>
+      </div>
+      <h1 class="font-display text-2xl md:text-4xl font-extrabold mt-2">{reg.title}</h1>
+      <p class="mt-2 text-white/80 max-w-3xl">{reg.short}</p>
+    </div>
+  </section>
+
+  <section class="container-page py-8">
+    {roles.length > 0 && (
+      <div class="card p-4 mb-6">
+        <div class="text-xs uppercase tracking-wide text-kiber-muted font-semibold mb-2">Кому особенно важно</div>
+        <div class="flex flex-wrap gap-2">
+          {roles.map((p) => (
+            <a href={`/positions/${p.slug}/`} class="chip hover:bg-kiber-dark/10 transition">
+              <span>{p.icon}</span> {p.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <article class="card p-6 md:p-10">
+      {Content ? (
+        <div class="prose prose-portal max-w-none">
+          <Content />
+        </div>
+      ) : (
+        <div class="text-kiber-muted">
+          Файл регламента не найден: <code>{reg.file}</code>.
+        </div>
+      )}
+    </article>
+  </section>
+</BaseLayout>

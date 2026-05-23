@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "headers": [
+    {
+      "source": "/pagefind/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, immutable" }
+      ]
+    }
+  ]
+}

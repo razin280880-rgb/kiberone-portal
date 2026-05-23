@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SCRIPTS, SCRIPT_CATEGORIES } from '@/data/scripts';
+import { POSITIONS } from '@/data/positions';
+import { getScript } from '@/lib/content';
+
+export function getStaticPaths() {
+  return SCRIPTS.map((s) => ({ params: { slug: s.slug } }));
+}
+
+const { slug } = Astro.params;
+const sc = SCRIPTS.find((s) => s.slug === slug)!;
+const mod = getScript(sc.file);
+const Content = mod?.Content;
+const cat = SCRIPT_CATEGORIES[sc.category];
+const roles = sc.forRoles
+  .map((rs) => POSITIONS.find((p) => p.slug === rs))
+  .filter(Boolean) as typeof POSITIONS;
+---
+<BaseLayout title={sc.title} description={sc.short}>
+  <section class="bg-kiber-dark text-white">
+    <div class="container-page py-10 md:py-12">
+      <div class="text-sm space-x-1">
+        <a href="/scripts/" class="text-kiber-lime/80 hover:text-kiber-lime">Скрипты</a>
+        <span class="text-white/40">/</span>
+        <span class="text-white/85">{cat.label}</span>
+      </div>
+      <h1 class="font-display text-2xl md:text-4xl font-extrabold mt-2">{sc.title}</h1>
+      <p class="mt-2 text-white/80 max-w-3xl">{sc.short}</p>
+    </div>
+  </section>
+
+  <section class="container-page py-8">
+    {roles.length > 0 && (
+      <div class="card p-4 mb-6">
+        <div class="text-xs uppercase tracking-wide text-kiber-muted font-semibold mb-2">Кому особенно важно</div>
+        <div class="flex flex-wrap gap-2">
+          {roles.map((p) => (
+            <a href={`/positions/${p.slug}/`} class="chip hover:bg-kiber-dark/10 transition">
+              <span>{p.icon}</span> {p.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <article class="card p-6 md:p-10">
+      {Content ? (
+        <div class="prose prose-portal max-w-none">
+          <Content />
+        </div>
+      ) : (
+        <div class="text-kiber-muted">
+          Файл скрипта не найден: <code>{sc.file}</code>.
+        </div>
+      )}
+    </article>
+  </section>
+</BaseLayout>

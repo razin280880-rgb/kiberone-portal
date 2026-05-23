@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { REGULATIONS, REGULATION_CATEGORIES } from '@/data/regulations';
+
+const grouped = REGULATIONS.reduce<Record<string, typeof REGULATIONS>>((acc, r) => {
+  (acc[r.category] ||= []).push(r);
+  return acc;
+}, {});
+const order: Array<keyof typeof REGULATION_CATEGORIES> = [
+  'process', 'event', 'communication', 'onboarding', 'plan',
+];
+---
+<BaseLayout title="Регламенты" description="Регламенты процессов KIBERone: пропуски, ярмарка, аттестации, планы и памятки.">
+  <section class="bg-kiber-dark text-white">
+    <div class="container-page py-12 md:py-16">
+      <a href="/" class="text-sm text-kiber-lime/80 hover:text-kiber-lime">← На главную</a>
+      <h1 class="font-display text-3xl md:text-5xl font-extrabold mt-3">Регламенты</h1>
+      <p class="mt-3 text-white/80 max-w-2xl">
+        Правила работы сети: процессы, события года (ярмарка, открытый урок), коммуникация с родителями, программы адаптации, планы развития.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12 space-y-12">
+    {order.map((cat) => {
+      const list = grouped[cat] || [];
+      if (!list.length) return null;
+      const meta = REGULATION_CATEGORIES[cat];
+      return (
+        <div>
+          <h2 class="font-display text-xl md:text-2xl font-bold text-kiber-dark mb-4 flex items-center gap-2">
+            <span>{meta.icon}</span> {meta.label}
+          </h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {list.map((r) => (
+              <a href={`/regulations/${r.slug}/`} class="card p-5 hover:-translate-y-0.5 transition flex flex-col">
+                <div class="font-semibold text-kiber-dark">{r.title}</div>
+                <p class="text-sm text-kiber-ink/80 mt-2 flex-1">{r.short}</p>
+                <span class="mt-3 text-sm font-semibold text-kiber-blue">Открыть →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      );
+    })}
+  </section>
+</BaseLayout>

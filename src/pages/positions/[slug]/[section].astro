@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PositionNav from '@/components/PositionNav.astro';
+import { POSITIONS, POSITION_SECTIONS } from '@/data/positions';
+import { getPositionFile } from '@/lib/content';
+
+export function getStaticPaths() {
+  const paths: Array<{ params: { slug: string; section: string } }> = [];
+  for (const p of POSITIONS) {
+    for (const s of POSITION_SECTIONS) {
+      paths.push({ params: { slug: p.slug, section: s.slug } });
+    }
+  }
+  return paths;
+}
+
+const { slug, section } = Astro.params;
+const position = POSITIONS.find((p) => p.slug === slug)!;
+const sec = POSITION_SECTIONS.find((s) => s.slug === section)!;
+const idx = POSITION_SECTIONS.findIndex((s) => s.slug === section);
+const prev = idx > 0 ? POSITION_SECTIONS[idx - 1] : null;
+const next = idx < POSITION_SECTIONS.length - 1 ? POSITION_SECTIONS[idx + 1] : null;
+const mod = getPositionFile(position.folder, sec.file);
+const Content = mod?.Content;
+---
+<BaseLayout title={`${sec.title} — ${position.title}`} description={`${sec.title} для роли ${position.full}.`}>
+  <section class="bg-gradient-to-br from-kiber-dark to-kiber-deep text-white">
+    <div class="container-page py-10 md:py-12">
+      <div class="text-sm space-x-1">
+        <a href="/positions/" class="text-kiber-lime/80 hover:text-kiber-lime">Должности</a>
+        <span class="text-white/40">/</span>
+        <a href={`/positions/${position.slug}/`} class="text-kiber-lime/80 hover:text-kiber-lime">{position.title}</a>
+        <span class="text-white/40">/</span>
+        <span class="text-white/85">{sec.title}</span>
+      </div>
+      <h1 class="font-display text-2xl md:text-4xl font-extrabold mt-3">
+        <span class="mr-2">{sec.icon}</span>{sec.title}
+      </h1>
+      <p class="mt-1 text-white/75">{position.full}</p>
+    </div>
+  </section>
+
+  <section class="container-page py-8">
+    <PositionNav slug={position.slug} active={sec.slug} />
+  </section>
+
+  <section class="container-page pb-8">
+    <article class="card p-6 md:p-10">
+      {Content ? (
+        <div class="prose prose-portal max-w-none">
+          <Content />
+        </div>
+      ) : (
+        <div class="text-kiber-muted">
+          Файл <code>{sec.file}</code> для роли «{position.title}» пока не найден.
+        </div>
+      )}
+    </article>
+
+    <div class="mt-6 flex items-center justify-between gap-3">
+      {prev ? (
+        <a href={`/positions/${position.slug}/${prev.slug}/`} class="btn-ghost">
+          ← {prev.icon} {prev.title}
+        </a>
+      ) : <span></span>}
+      {next ? (
+        <a href={`/positions/${position.slug}/${next.slug}/`} class="btn-primary">
+          {next.icon} {next.title} →
+        </a>
+      ) : (
+        <a href={`/positions/${position.slug}/`} class="btn-primary">
+          Завершить — к обзору
+        </a>
+      )}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.production
+.DS_Store
+*.log
+.vercel/
+public/pagefind/
+# Synced content (src/content/) IS committed — Vercel needs it to build.
+# Run `npm run sync` locally to refresh it from kiberone-management before commit.

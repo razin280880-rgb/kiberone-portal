@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-kiber-sand text-kiber-ink font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-kiber-lime text-kiber-dark;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .card {
+    @apply rounded-2xl bg-white shadow-sm ring-1 ring-black/5;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition;
+  }
+  .btn-primary {
+    @apply btn bg-kiber-dark text-white hover:bg-kiber-deep;
+  }
+  .btn-accent {
+    @apply btn bg-kiber-lime text-kiber-dark hover:brightness-95;
+  }
+  .btn-ghost {
+    @apply btn ring-1 ring-kiber-ink/15 hover:bg-white;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-kiber-dark/5 px-2.5 py-1 text-xs font-medium text-kiber-dark;
+  }
+  .prose-portal {
+    @apply prose-headings:font-display prose-headings:text-kiber-dark
+           prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
+           prose-a:text-kiber-blue prose-a:font-medium
+           prose-strong:text-kiber-dark
+           prose-li:my-1 prose-table:my-4
+           prose-table:text-sm
+           prose-th:bg-kiber-dark/5 prose-th:px-3 prose-th:py-2 prose-th:text-left
+           prose-td:px-3 prose-td:py-2 prose-td:border-t prose-td:border-black/5;
+  }
+}

@@ -1,0 +1,124 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { POSITIONS } from '@/data/positions';
+
+const branchCount = POSITIONS.filter(p => p.group === 'branch').length;
+const centralCount = POSITIONS.filter(p => p.group === 'central').length;
+---
+<BaseLayout title="KIBERone — База знаний команды" description="Внутренний портал для сотрудников KIBERone: должности, регламенты, скрипты, онбординг.">
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-kiber-dark via-kiber-deep to-kiber-dark text-white">
+    <div class="container-page py-16 md:py-24 relative">
+      <div class="flex items-center gap-2 mb-6">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-kiber-lime animate-pulse"></span>
+          Внутренний портал команды
+        </span>
+      </div>
+      <h1 class="font-display text-4xl md:text-6xl font-extrabold leading-[1.05] max-w-3xl">
+        Всё о работе в KIBERone <span class="text-kiber-lime">в одном месте</span>
+      </h1>
+      <p class="mt-5 text-lg text-white/80 max-w-2xl">
+        Должности, обязанности, регламенты, скрипты, чек-листы и онбординг — для каждого сотрудника сети из 7 филиалов.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/onboarding/" class="btn-accent">Я новый сотрудник →</a>
+        <a href="/positions/" class="btn-ghost ring-white/20 text-white hover:bg-white/10">
+          Найти свою должность
+        </a>
+      </div>
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+          <div class="text-3xl font-display font-bold text-kiber-lime">{POSITIONS.length}</div>
+          <div class="text-sm text-white/70 mt-1">должностей</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+          <div class="text-3xl font-display font-bold text-kiber-lime">7</div>
+          <div class="text-sm text-white/70 mt-1">филиалов</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+          <div class="text-3xl font-display font-bold text-kiber-lime">{centralCount}</div>
+          <div class="text-sm text-white/70 mt-1">центральных ролей</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+          <div class="text-3xl font-display font-bold text-kiber-lime">{branchCount}</div>
+          <div class="text-sm text-white/70 mt-1">ролей в филиале</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE TRACKS -->
+  <section class="container-page py-16">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-kiber-dark">С чего начать</h2>
+        <p class="text-kiber-muted mt-1">Три способа войти в портал — выбирай свой.</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Card 1 -->
+      <a href="/onboarding/" class="card p-6 hover:-translate-y-0.5 transition flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-kiber-lime grid place-items-center text-2xl mb-4">🚀</div>
+        <h3 class="font-display text-xl font-bold text-kiber-dark">Я новый сотрудник</h3>
+        <p class="text-kiber-muted mt-2 text-sm flex-1">
+          Пошаговый маршрут на первый день, первую неделю и первый месяц. Что прочитать, что сделать, к кому обратиться.
+        </p>
+        <span class="mt-4 inline-flex items-center gap-1 text-kiber-blue font-semibold text-sm">
+          Открыть маршрут →
+        </span>
+      </a>
+      <!-- Card 2 -->
+      <a href="/positions/" class="card p-6 hover:-translate-y-0.5 transition flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-kiber-dark text-kiber-lime grid place-items-center text-2xl mb-4">🧭</div>
+        <h3 class="font-display text-xl font-bold text-kiber-dark">По должностям</h3>
+        <p class="text-kiber-muted mt-2 text-sm flex-1">
+          {POSITIONS.length} ролей: тьютор, ассистент, методист, фермер, хантер, РФ, РОП, РОС, HR и другие. Полное описание каждой.
+        </p>
+        <span class="mt-4 inline-flex items-center gap-1 text-kiber-blue font-semibold text-sm">
+          Список должностей →
+        </span>
+      </a>
+      <!-- Card 3 -->
+      <a href="/regulations/" class="card p-6 hover:-translate-y-0.5 transition flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-kiber-blue text-white grid place-items-center text-2xl mb-4">📋</div>
+        <h3 class="font-display text-xl font-bold text-kiber-dark">Регламенты и скрипты</h3>
+        <p class="text-kiber-muted mt-2 text-sm flex-1">
+          Правила работы по сети, регламенты процессов (пропуски, ярмарка, аттестации), скрипты звонков и WhatsApp.
+        </p>
+        <span class="mt-4 inline-flex items-center gap-1 text-kiber-blue font-semibold text-sm">
+          Открыть регламенты →
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- POSITIONS GRID PREVIEW -->
+  <section class="container-page pb-16">
+    <div class="flex items-end justify-between mb-6">
+      <div>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-kiber-dark">Все должности</h2>
+        <p class="text-kiber-muted mt-1">Найди свою роль или роль коллеги.</p>
+      </div>
+      <a href="/positions/" class="hidden md:inline text-sm text-kiber-blue font-semibold">Открыть весь список →</a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {POSITIONS.slice(0, 9).map((p) => (
+        <a href={`/positions/${p.slug}/`} class="card p-4 flex items-start gap-3 hover:-translate-y-0.5 transition">
+          <div class="w-10 h-10 rounded-xl bg-kiber-dark/5 grid place-items-center text-xl shrink-0">{p.icon}</div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <div class="font-semibold text-kiber-dark truncate">{p.title}</div>
+              <span class="chip">{p.group === 'central' ? 'центральная' : 'филиал'}</span>
+            </div>
+            <div class="text-xs text-kiber-muted mt-0.5">{p.dept}</div>
+            <div class="text-sm text-kiber-ink/80 mt-1.5 line-clamp-2">{p.short}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="mt-6 md:hidden">
+      <a href="/positions/" class="btn-primary w-full">Открыть весь список</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,89 @@
+---
+const pathname = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'Главная' },
+  { href: '/onboarding/', label: 'Новый сотрудник' },
+  { href: '/positions/', label: 'Должности' },
+  { href: '/regulations/', label: 'Регламенты' },
+  { href: '/scripts/', label: 'Скрипты' },
+];
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+const onSearchPage = pathname.startsWith('/search');
+---
+
+<header class="sticky top-0 z-30 bg-white/85 backdrop-blur border-b border-black/5">
+  <div class="container-page flex items-center justify-between h-16">
+    <a href="/" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 rounded-xl bg-kiber-dark grid place-items-center text-kiber-lime font-display font-bold">
+        K1
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="text-sm font-semibold text-kiber-dark">KIBERone</span>
+        <span class="text-[11px] text-kiber-muted -mt-0.5">База знаний команды</span>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-1">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class={[
+            'px-3 py-2 rounded-full text-sm font-medium transition',
+            isActive(item.href)
+              ? 'bg-kiber-dark text-white'
+              : 'text-kiber-dark/80 hover:bg-kiber-dark/5'
+          ].join(' ')}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="/search/"
+        aria-label="Поиск"
+        class={[
+          'ml-1 inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition',
+          onSearchPage
+            ? 'bg-kiber-dark text-white'
+            : 'ring-1 ring-kiber-dark/15 text-kiber-dark/80 hover:bg-kiber-dark/5'
+        ].join(' ')}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        Поиск
+      </a>
+    </nav>
+    <details class="md:hidden relative">
+      <summary class="list-none cursor-pointer px-3 py-2 rounded-full ring-1 ring-kiber-dark/15 text-sm font-medium">
+        Меню
+      </summary>
+      <div class="absolute right-0 mt-2 w-52 card p-2 z-40">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            class={[
+              'block px-3 py-2 rounded-xl text-sm font-medium',
+              isActive(item.href)
+                ? 'bg-kiber-dark text-white'
+                : 'text-kiber-dark/80 hover:bg-kiber-dark/5'
+            ].join(' ')}
+          >
+            {item.label}
+          </a>
+        ))}
+        <a
+          href="/search/"
+          class={[
+            'block px-3 py-2 rounded-xl text-sm font-medium',
+            onSearchPage
+              ? 'bg-kiber-dark text-white'
+              : 'text-kiber-dark/80 hover:bg-kiber-dark/5'
+          ].join(' ')}
+        >
+          🔍 Поиск
+        </a>
+      </div>
+    </details>
+  </div>
+</header>
