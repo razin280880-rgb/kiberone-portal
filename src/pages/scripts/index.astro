@@ -7,7 +7,8 @@ const grouped = SCRIPTS.reduce<Record<string, typeof SCRIPTS>>((acc, s) => {
   return acc;
 }, {});
 const order: Array<keyof typeof SCRIPT_CATEGORIES> = [
-  'soprovozhdenie', 'prodlenie', 'probnyj', 'reanimaciya', 'letnij', 'shablony',
+  'soprovozhdenie', 'prodlenie', 'probnyj', 'reanimaciya', 'letnij',
+  'shkoly', 'dokumenty', 'shablony',
 ];
 ---
 <BaseLayout title="Скрипты" description="Скрипты звонков, WhatsApp-шаблоны и шпаргалки KIBERone.">

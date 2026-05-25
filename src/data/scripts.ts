@@ -4,7 +4,9 @@ export type ScriptCategory =
   | 'reanimaciya'      // возврат ушедших
   | 'letnij'           // летние программы
   | 'probnyj'          // работа с пробным занятием
-  | 'shablony';        // шаблоны WhatsApp и шпаргалки
+  | 'shablony'         // шаблоны WhatsApp и шпаргалки
+  | 'shkoly'           // школьный канал: мастер-классы и касания
+  | 'dokumenty';       // юридические скрипты — ПД, договоры, согласия
 
 export type ScriptMeta = {
   file: string;
@@ -176,6 +178,103 @@ export const SCRIPTS: ScriptMeta[] = [
     short: 'Холодный звонок ушедшему клиенту',
     forRoles: ['hanter', 'fermer'],
   },
+  // ─── обновление 24 мая 2026 ───────────────────────────────────────────
+  {
+    file: '41-skript-promoutera-steve-kanikuly.md',
+    slug: 'promouter-steve-kanikuly',
+    title: 'Скрипт промоутера «Стив» — каникулы',
+    category: 'shkoly',
+    short: 'Полевой промоутер для летнего лидгена',
+    forRoles: ['manager-razvitiya'],
+  },
+  {
+    file: '47-skript-kasanie-1-zapis-na-mk.md',
+    slug: 'kasanie-1-zapis-na-mk',
+    title: 'Касание №1. Запись на мастер-класс',
+    category: 'shkoly',
+    short: 'Первый звонок — приглашение на мастер-класс',
+    forRoles: ['hanter', 'rop'],
+  },
+  {
+    file: '48-skript-kasanie-2-posle-mk.md',
+    slug: 'kasanie-2-posle-mk',
+    title: 'Касание №2. После мастер-класса',
+    category: 'shkoly',
+    short: 'Первый звонок после МК — фиксация интереса',
+    forRoles: ['hanter', 'rop'],
+  },
+  {
+    file: '49-skript-kasanie-3-povtor.md',
+    slug: 'kasanie-3-povtor',
+    title: 'Касание №3. Повторный звонок',
+    category: 'shkoly',
+    short: 'Второй звонок после МК — фиксация решения',
+    forRoles: ['hanter', 'rop'],
+  },
+  {
+    file: '50-skript-kasanie-4-privedi-druga.md',
+    slug: 'kasanie-4-privedi-druga',
+    title: 'Касание №4. Акция «Приведи друга»',
+    category: 'shkoly',
+    short: 'Первая неделя обучения + активация рекомендаций',
+    forRoles: ['fermer', 'hanter'],
+  },
+  {
+    file: '64-script-roditelskoye-sobranie.md',
+    slug: 'roditelskoye-sobranie',
+    title: 'Скрипт работы на родительском собрании',
+    category: 'shkoly',
+    short: 'Что говорить родителям, когда выступаешь на собрании',
+    forRoles: ['manager-razvitiya', 'rukovoditel-filiala'],
+  },
+  {
+    file: '65-skript-personalnye-dannye.md',
+    slug: 'personalnye-dannye-hanter',
+    title: 'Скрипт по ПД для менеджеров (ФЗ-152)',
+    category: 'dokumenty',
+    short: '«А откуда у вас мой номер?» — ответ хантера',
+    forRoles: ['hanter', 'rop'],
+  },
+  {
+    file: '66-pokazatelnyj-urok.md',
+    slug: 'pokazatelnyj-urok',
+    title: 'Показательный урок — что доносим родителю',
+    category: 'probnyj',
+    short: 'Что обязательно сказать родителю при записи на показательный',
+    forRoles: ['hanter', 'manager-razvitiya'],
+  },
+  {
+    file: '67-script-personalnye-dannye.md',
+    slug: 'personalnye-dannye-sbor',
+    title: 'Скрипт сбора ПД — анкеты и согласия',
+    category: 'dokumenty',
+    short: 'Как корректно собирать ПД на МК, родсобрании, через QR',
+    forRoles: ['manager-razvitiya', 'tutor', 'rukovoditel-filiala'],
+  },
+  {
+    file: '75-script-kross-promo-partnery.md',
+    slug: 'kross-promo-partnery',
+    title: 'Скрипт кросс-промо с партнёрами',
+    category: 'shkoly',
+    short: 'Партнёрка B2B: первый разговор с потенциальным партнёром',
+    forRoles: ['manager-razvitiya', 'rukovoditel-filiala'],
+  },
+  {
+    file: '81-skript-hantera-dozhim-cherez-dorozhnuyu-kartu.md',
+    slug: 'hanter-dozhim-cherez-kartu',
+    title: 'Хантер: дожим через дорожную карту',
+    category: 'prodlenie',
+    short: 'Использование дорожной карты обучения как аргумента закрытия',
+    forRoles: ['hanter', 'rop'],
+  },
+  {
+    file: '82-skript-soprovozhdeniya-prodlenie-cherez-sleduyushchiy-god.md',
+    slug: 'prodlenie-cherez-sleduyushchiy-god',
+    title: 'Сопровождение: продление через «следующий год»',
+    category: 'prodlenie',
+    short: 'Аргументация продления через дорожную карту обучения',
+    forRoles: ['fermer', 'ros'],
+  },
 ];
 
 export const SCRIPT_CATEGORIES: Record<ScriptCategory, { label: string; icon: string }> = {
@@ -185,4 +284,6 @@ export const SCRIPT_CATEGORIES: Record<ScriptCategory, { label: string; icon: st
   letnij: { label: 'Летние программы', icon: '☀️' },
   probnyj: { label: 'Пробный урок', icon: '🎯' },
   shablony: { label: 'Шаблоны и шпаргалки', icon: '📋' },
+  shkoly: { label: 'Школы и мастер-классы', icon: '🏫' },
+  dokumenty: { label: 'Документы и ПД', icon: '📄' },
 };

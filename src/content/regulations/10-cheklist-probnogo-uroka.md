@@ -11,6 +11,7 @@
 Пробное — это не «показать урок», это **двойная продажа**. Родитель должен уйти не с прайсом, а с решением.
 
 **Связанные документы:**
+- [`43-video-baza-probnyh-urokov.md`](43-video-baza-probnyh-urokov.md) — **видео-эталоны** пробного урока (головной офис + наш). Обязательный просмотр перед первым самостоятельным пробным.
 - [`positions/07-hanter/04-cheklisty.md`](positions/07-hanter/04-cheklisty.md) — общие чек-листы хантера
 - [`positions/02-tutor/04-cheklisty.md`](positions/02-tutor/04-cheklisty.md) — чек-листы тьютора
 - [`positions/03-assistent/04-cheklisty.md`](positions/03-assistent/04-cheklisty.md) — ассистент / встреча

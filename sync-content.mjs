@@ -34,6 +34,21 @@ const ROOT_REGULATIONS = [
   '02-otchet-progressa-roditelyu.md',
   '23-pamyatka-roditelyu-whatsapp.md',
   '28-plan-pilota-perezagruzka-cheln.md',
+  // ── обновление 24 мая 2026 ──
+  '34-provedenie-master-class-v-shkole.md',
+  '36-licenzii-i-rekvizity.md',
+  '37-pamyatka-licenziya-otvety.md',
+  '38-principy-stazhirovki-pervye-dni.md',
+  '44-algoritm-raboty-s-lidom.md',
+  '45-reglament-zayavok-tg.md',
+  '46-reglament-15-na-35.md',
+  '51-checklist-menedzhera-mk.md',
+  '56-standart-obshheniya.md',
+  '59-zapolnenie-dogovorov.md',
+  '60-stoimost-lokacii-2026.md',
+  '70-rukovodstvo-vzaimodejstviya-s-ou.md',
+  '71-cheklist-promo-v-ou.md',
+  '80-dorozhnaya-karta-obucheniya-po-vozrastam.md',
 ];
 
 const ROOT_SCRIPTS = [
@@ -57,6 +72,19 @@ const ROOT_SCRIPTS = [
   '21-script-perezagruzka-zakrytie.md',
   '24-script-fermera-priglashenie-na-otkrytyi-urok.md',
   '29-script-prozvon-ushedshih-perezagruzka.md',
+  // ── обновление 24 мая 2026 ──
+  '41-skript-promoutera-steve-kanikuly.md',
+  '47-skript-kasanie-1-zapis-na-mk.md',
+  '48-skript-kasanie-2-posle-mk.md',
+  '49-skript-kasanie-3-povtor.md',
+  '50-skript-kasanie-4-privedi-druga.md',
+  '64-script-roditelskoye-sobranie.md',
+  '65-skript-personalnye-dannye.md',
+  '66-pokazatelnyj-urok.md',
+  '67-script-personalnye-dannye.md',
+  '75-script-kross-promo-partnery.md',
+  '81-skript-hantera-dozhim-cherez-dorozhnuyu-kartu.md',
+  '82-skript-soprovozhdeniya-prodlenie-cherez-sleduyushchiy-god.md',
 ];
 
 function ensureDir(p) {
