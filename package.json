@@ -11,10 +11,13 @@
     "start": "astro dev --port 3005 --host",
     "build": "astro build",
     "postbuild": "node copy-pagefind.mjs",
-    "preview": "astro preview --port 3005",
-    "astro": "astro"
+    "preview": "npm run build && wrangler dev",
+    "astro": "astro",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "12",
     "@astrojs/tailwind": "^5.1.4",
     "astro": "^5.0.0",
     "astro-pagefind": "^2.0.0",
@@ -22,6 +25,7 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
+    "@tailwindcss/typography": "^0.5.19",
+    "wrangler": "^4.94.0"
   }
 }
