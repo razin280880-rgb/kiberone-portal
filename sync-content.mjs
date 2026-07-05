@@ -78,6 +78,8 @@ const ROOT_SCRIPTS = [
   '48-skript-kasanie-2-posle-mk.md',
   '49-skript-kasanie-3-povtor.md',
   '50-skript-kasanie-4-privedi-druga.md',
+  '53-10-tipovyh-vozrazhenij.md',
+  '62-vozrazheniya-rasshirennye.md',
   '64-script-roditelskoye-sobranie.md',
   '65-skript-personalnye-dannye.md',
   '66-pokazatelnyj-urok.md',

@@ -1,8 +1,10 @@
 # Регламент планёрок руководителей отделов
 
-**Версия:** 1.1
-**Дата введения:** 2026-05-22
+**Версия:** 1.2
+**Дата введения:** 2026-05-22 (v1.1 — каркас), 2026-06-21 (v1.2 — добавлены ссылки на блоки)
 **Действует для:** всех руководителей отделов KIBERone-сети
+
+> **Связано:** [`206-blok-marketologa-v-edinoy-planerke-marketolog.md`](206-blok-marketologa-v-edinoy-planerke-marketolog.md) — содержание блока маркетолога в Level 2. [`207-bloki-rop-i-mr-v-edinoy-planerke-rop.md`](207-bloki-rop-i-mr-v-edinoy-planerke-rop.md) — содержание блоков РОП и МпР в Level 2. [`102-reglament-rop-mesyachnaya-analitika-voronki.md`](102-reglament-rop-mesyachnaya-analitika-voronki.md) — ежемесячный отчёт РОП (входит в «Месячную стратегическую», 1-й пн месяца). [`149-sverka-otchetov-mr-leady-po-kanalam.md`](149-sverka-otchetov-mr-leady-po-kanalam.md) — источник цифр МпР для еженедельного блока.
 
 ---
 
